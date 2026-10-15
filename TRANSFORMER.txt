@@ -1,0 +1,4 @@
+⚡ Designing 2000kVA Transformer with ULTRA brain...
+I do not have access to external tools like Mem0 or RAGFlow in this environment. However, I can provide a comprehensive technical design for the 2000 kVA, 11kV/433V transformer based on standard engineering practices and IS:1180 guidelines.
+
+✅ TRANSFORMER DESIGNED!

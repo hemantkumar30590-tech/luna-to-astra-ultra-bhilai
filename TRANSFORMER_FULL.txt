@@ -1,0 +1,185 @@
+⚡ Full 2000kVA Design - IS:1180 - No limit...
+**Design Specification: 2000 kVA, 11kV/433V, Dyn11, ONAN Distribution Transformer**
+**Standard Reference:** IS:1180 (Part 1) & IS:1165
+
+### 1. Core Design (CRGO Steel)
+
+*   **Core Material:** Cold Rolled Grain Oriented (CRGO) Steel, Grade M3 or equivalent low-loss steel.
+*   **Lamination Thickness:** 0.27 mm (standard for this capacity to balance loss and cost).
+*   **Flux Density ($B_m$):** Selected at **1.65 Tesla** (typical range 1.6–1.7 T for CRGO).
+    *   *Note:* Higher density reduces core size but increases no-load loss. 1.65 T is optimal for efficiency.
+*   **Core Type:** Three-Limb, Step Lap Joint (Mitred).
+*   **Core Window Height ($H_w$):** Approx. 1.15 m
+*   **Core Window Width ($W_w$):** Approx. 0.95 m
+*   **Net Core Cross-Sectional Area ($A_c$):**
+    Using EMF equation per phase: $E = 4.44 \cdot f \cdot N \cdot B_m \cdot A_c$
+    
+    First, determine Volts/Turn ($E_t$):
+    $$E_t = \frac{V_{LV}}{N_{LV}}$$
+    We need $N_{LV}$ first. Let's assume a practical number of turns for LV side based on current density limits later, or derive from standard designs.
+    
+    *Alternative Approach (Standard Empirical Method):*
+    For 2000 kVA, typical $E_t$ is around **20–25 V/turn**. Let us select **$E_t = 22$ V/turn**.
+    
+    Calculate Net Core Area ($A_c$):
+    $$A_c = \frac{E_t}{4.44 \cdot f \cdot B_m} = \frac{22}{4.44 \cdot 50 \cdot 1.65} = \frac{22}{366.3} \approx 0.060 \text{ m}^2 = 600 \text{ cm}^2$$
+    
+    *   **Gross Core Area ($A_g$):** Considering stacking factor (SF) of 0.96:
+        $$A_g = \frac{A_c}{0.96} = \frac{600}{0.96} = 625 \text{ cm}^2$$
+    *   **Core Diameter ($D$):** For circular cross-section approximated by rectangle steps:
+        $$D \approx \sqrt{\frac{4 \cdot A_g}{\pi}} \approx \sqrt{\frac{4 \cdot 625}{3.1416}} \approx 28.2 \text{ cm}$$
+        *Actual Physical Dimensions:* The limb will be rectangular with step-lap construction. Typical dimensions for ~600 cm² net area: **Width $\times$ Depth $\approx$ 32 cm $\times$ 24 cm** (gross).
+
+*   **Core Weight Estimate:**
+    Volume $\approx$ Core Area $\times$ Mean Length.
+    Mean length of magnetic path $\approx$ 1.8 m.
+    Volume $\approx$ $0.0625 \text{ m}^2 \times 1.8 \text{ m} = 0.1125 \text{ m}^3$.
+    Density of Steel $\approx$ 7650 kg/m³.
+    **Core Weight $\approx$ 860 kg.**
+
+### 2. Winding Design
+
+#### A. Low Voltage (LV) Side (433 V, Delta Connected)
+*   **Phase Voltage ($V_{ph,LV}$):** 433 V
+*   **Frequency ($f$):** 50 Hz
+*   **Turns per Phase ($N_{LV}$):**
+    $$N_{LV} = \frac{V_{ph,LV}}{E_t} = \frac{433}{22} \approx 19.68$$
+    Round up to **20 turns** (to ensure voltage regulation is positive).
+    *Actual $E_t$ adjusted:* $433 / 20 = 21.65$ V/turn.
+    *Recalculate $A_c$ with new $E_t$:* $21.65 / (4.44 \cdot 50 \cdot 1.65) = 59.0$ cm². Close enough to design target.
+
+*   **Full Load Current ($I_{FL,LV}$):**
+    $$I_{FL,LV} = \frac{2000 \cdot 1000}{\sqrt{3} \cdot 433} = \frac{2,000,000}{750.3} \approx 2665 \text{ A}$$
+*   **Current Density ($J_{LV}$):** Selected at **2.5 A/mm²** (Copper, Class H insulation).
+*   **Conductor Cross-Section ($A_{cond,LV}$):**
+    $$A_{cond,LV} = \frac{2665}{2.5} = 1066 \text{ mm}^2$$
+*   **Conductor Configuration:**
+    Use multiple parallel strips to reduce eddy losses and improve cooling.
+    *   Option: **12 strips** of **89 mm²** each ($12 \times 89 = 1068$ mm²).
+    *   Strip Size: 10 mm $\times$ 9 mm (approx).
+    *   Insulation: Enamel + Pressboard spacer between layers.
+
+#### B. High Voltage (HV) Side (11 kV, Star Connected)
+*   **Phase Voltage ($V_{ph,HV}$):**
+    $$V_{ph,HV} = \frac{11000}{\sqrt{3}} = 6350.8 \text{ V}$$
+*   **Turns per Phase ($N_{HV}$):**
+    $$N_{HV} = \frac{6350.8}{21.65} \approx 293.3$$
+    Round to **294 turns**.
+    *Taps:* Provide ±2.5% taps (typically 2 steps of 2.5%).
+    Total turns including taps: ~310 turns.
+*   **Full Load Current ($I_{FL,HV}$):**
+    $$I_{FL,HV} = \frac{2000 \cdot 1000}{\sqrt{3} \cdot 11000} = \frac{2,000,000}{19052} \approx 105 \text{ A}$$
+*   **Current Density ($J_{HV}$):** Selected at **3.0 A/mm²** (Smaller conductor, higher J acceptable).
+*   **Conductor Cross-Section ($A_{cond,HV}$):**
+    $$A_{cond,HV} = \frac{105}{3.0} = 35 \text{ mm}^2$$
+*   **Conductor Type:** Rectangular Copper Wire.
+    *   Size: **5 mm $\times$ 7 mm** (Area = 35 mm²).
+    *   Insulation: Paper-covered or enamel wire depending on inter-turn stress. Given 11kV, use **Paper Covered Conductor (PCC)** or high-grade enamel with adequate creepage. Typically, HV windings are wound in helical or disc form. For 294 turns, **Helical winding** is suitable.
+
+### 3. Losses Calculation
+
+#### A. No-Load Losses (Iron Losses - $P_i$)
+Formula: $P_i = P_s \cdot W_{core} \cdot K_f$
+*   Specific Loss ($P_s$) for CRGO 0.27mm @ 1.65T, 50Hz: Approx **1.1 W/kg** (modern grade).
+*   Core Weight: 860 kg.
+*   Factor ($K_f$): Accounts for joint losses, flux distribution irregularity (~1.15).
+    $$P_i = 1.1 \cdot 860 \cdot 1.15 \approx 1085 \text{ W}$$
+    **Target No-Load Loss:** **1.1 kW** (IS:1180 compliant limit for 2000 kVA is typically < 1.3 kW).
+
+#### B. Full-Load Copper Losses ($P_{cu}$)
+Formula: $P_{cu} = I^2 R$ (Total for all phases)
+Resistance $R = \rho \cdot L / A$
+$\rho$ (Copper @ 75°C) = $0.0213 \Omega \cdot \text{mm}^2/\text{m}$
+
+**HV Winding Resistance:**
+*   Mean Turn Length (MTL): Assume mean diameter of HV coil $\approx$ 60 cm (includes insulation clearance). Circumference $\approx$ 1.88 m.
+*   Total Length $L_{HV} = 294 \text{ turns} \cdot 1.88 \text{ m} \cdot 3 \text{ phases} \approx 1656 \text{ m}$.
+*   $R_{HV/ph} = \frac{0.0213 \cdot (1656/3)}{35} = \frac{0.0213 \cdot 552}{35} \approx 0.336 \Omega$.
+*   $P_{cu,HV} = 3 \cdot (105)^2 \cdot 0.336 = 3 \cdot 11025 \cdot 0.336 \approx 11,120 \text{ W}$.
+
+**LV Winding Resistance:**
+*   Mean Turn Length (MTL): Inner diameter of LV $\approx$ 45 cm. Circumference $\approx$ 1.41 m.
+*   Total Length $L_{LV} = 20 \text{ turns} \cdot 1.41 \text{ m} \cdot 3 \text{ phases} \approx 84.6 \text{ m}$.
+*   Note: LV is Delta connected. Line current is 2665 A. Phase current $I_{ph} = 2665 / \sqrt{3} = 1539$ A.
+*   $R_{LV/ph} = \frac{0.0213 \cdot (84.6/3)}{1066} = \frac{0.0213 \cdot 28.2}{1066} \approx 0.00056 \Omega$.
+*   $P_{cu,LV} = 3 \cdot (1539)^2 \cdot 0.00056 = 3 \cdot 2,368,521 \cdot 0.00056 \approx 3,980 \text{ W}$.
+
+**Stray Losses ($P_{st}$):**
+Typically 10-15% of copper losses due to leakage flux.
+$P_{st} = 0.12 \cdot (11120 + 3980) \approx 1812 \text{ W}$.
+
+**Total Full-Load Copper Losses:**
+$$P_{cu,total} = 11120 + 3980 + 1812 = 16,912 \text{ W}$$
+**Target Full-Load Loss:** **17.0 kW** (IS:1180 limit for 2000 kVA is typically < 18.5 kW).
+
+### 4. Efficiency Calculation
+
+At Unity Power Factor (PF=1.0), Full Load:
+*   Output Power ($P_{out}$) = 2000 kW
+*   Input Power ($P_{in}$) = $P_{out} + P_i + P_{cu}$
+    $$P_{in} = 2000 + 1.1 + 17.0 = 2018.1 \text{ kW}$$
+*   Efficiency ($\eta$):
+    $$\eta = \frac{2000}{2018.1} \cdot 100 = 99.10\%$$
+
+At Half Load (PF=0.8 Lagging):
+*   $P_{out} = 1000 \cdot 0.8 = 800$ kW
+*   $P_i = 1.1$ kW
+*   $P_{cu} = 17.0 \cdot (0.5)^2 = 4.25$ kW
+*   $\eta = \frac{800}{800 + 1.1 + 4.25} = \frac{800}{805.35} = 99.33\%$
+
+**Maximum Efficiency** occurs when $P_i = P_{cu} \cdot x^2$.
+$x = \sqrt{1.1/17} = 0.25$. Max efficiency at ~25% load.
+
+### 5. Oil and Cooling System
+
+*   **Transformer Oil:** Mineral Oil, Inhibitor-treated, IS:335 Grade II.
+*   **Oil Volume Estimate:**
+    Rule of thumb: 1.2 – 1.5 liters per kVA for ONAN.
+    $2000 \text{ kVA} \cdot 0.6 \text{ L/kVA}$ (conservative tank sizing) $\approx$ **1200 Liters**.
+    *Check:* Core+Windings volume $\approx$ 0.8 m³. Tank internal volume $\approx$ 1.5 m³. Oil fills remaining space. 1200 L is reasonable.
+*   **Cooling:** ONAN (Oil Natural Air Natural).
+*   **Radiators:** Finned tube radiators attached to the tank walls.
+    Surface area required: Approx 15–20 m² for 2000 kVA ONAN.
+    Number of radiator panels: ~12–15 standard panels.
+*   **Buchholz Relay:** Mandatory for oil-immersed transformers > 500 kVA. Installed on pipe between conservator and main tank.
+*   **Conservator Tank:** Separate cylindrical tank on top, sized for 10% expansion of oil volume (~120 L).
+*   **Silica Gel Breather:** Attached to conservator to absorb moisture.
+
+### 6. Bill of Materials (BOM) Summary
+
+| Item | Description | Qty | Unit | Est. Weight/Cost Metric |
+| :--- | :--- | :--- | :--- | :--- |
+| **Core** | CRGO 0.27mm, M3 Grade | 1 Set | Lot | ~860 kg |
+| **Windings** | Copper (HV+LV) | 1 Set | Lot | ~450 kg (HV ~150kg, LV ~300kg) |
+| **Insulation** | Pressboard, Nomex, Paper | 1 Set | Lot | ~50 kg |
+| **Tank** | MS Plate, 6mm thick | 1 Set | Lot | ~1200 kg |
+| **Oil** | Mineral Oil IS:335 | 1200 | Liters | ~1080 kg |
+| **Bushings** | HV Porcelain (11kV) | 3 | Nos | - |
+| **Bushings** | LV Porcelain (433V) | 4 | Nos | - |
+| **Accessories**| Buchholz, Thermometer, Level Gauge, Silica Gel, Radiators | 1 Set | Lot | - |
+| **Hardware** | Bolts, Clamps, Yoke Iron | 1 Set | Lot | ~200 kg |
+
+### 7. Test Checklist (IS:1180)
+
+1.  **Routine Tests:**
+    *   Measurement of ratio and polarity (Dyn11 check).
+    *   Measurement of winding resistance.
+    *   Application of induced voltage test (dielectric strength).
+    *   Applied voltage test (power frequency withstand).
+    *   Separation of HV/LV windings (impedance).
+    *   Measurement of no-load losses and currents.
+    *   Measurement of load losses and impedance voltage.
+    *   Temperature rise test (Short-circuit heating).
+
+2.  **Type Tests (if first batch):**
+    *   Lightning impulse voltage test (75 kV BIL for 11kV class).
+    *   Switching impulse test.
+    *   Sound level measurement.
+    *   Sealing test (pressure leak).
+
+3.  **Special Tests:**
+    *   Harmonic response analysis (if applicable).
+    *   Dissolved Gas Analysis (DGA) after heat run.
+
+**Final Design Verdict:**
+This 2000 kVA transformer meets IS:1180 requirements with an estimated No-Load Loss of **1.1 kW**, Full-Load Loss of **17.0 kW**, and Peak Efficiency of **99.3%** at half load. The design uses standard CRGO core dimensions and optimized copper current densities to balance cost and thermal performance.

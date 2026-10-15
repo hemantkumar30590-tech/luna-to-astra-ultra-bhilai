@@ -1,0 +1,14 @@
+{
+  "name": "luna-to-astra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "astra_wrapper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "module",
+  "dependencies": {
+    "openai": "^7.34.0"
+  }
+}
